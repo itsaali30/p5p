@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Deploy h2 to GitHub Pages
 
 on:
   push:
@@ -20,13 +20,17 @@ jobs:
         cache: 'npm'
 
     - name: Install dependencies
-      run: npm install
+      run: |
+        cd h2
+        npm install
 
     - name: Build project
-      run: npm run build
+      run: |
+        cd h2
+        npm run build
 
     - name: Deploy to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@v4
       with:
         branch: gh-pages
-        folder: dist
+        folder: h2/dist
