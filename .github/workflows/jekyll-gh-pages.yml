@@ -1,36 +1,31 @@
-name: Deploy h2 to GitHub Pages
+name: Deploy Vue + p5.js to GitHub Pages
 
 on:
   push:
     branches:
-      - main
+      - main  # Change if your default branch is different
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repo
-      uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: 18
-        cache: 'npm'
+      - name: Install dependencies
+        run: npm install
 
-    - name: Install dependencies
-      run: |
-        cd h2
-        npm install
+      - name: Build project
+        run: npm run build
 
-    - name: Build project
-      run: |
-        cd h2
-        npm run build
-
-    - name: Deploy to GitHub Pages
-      uses: JamesIves/github-pages-deploy-action@v4
-      with:
-        branch: gh-pages
-        folder: h2/dist
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: dist
