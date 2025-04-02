@@ -3,7 +3,7 @@ name: Deploy Vue + p5.js to GitHub Pages
 on:
   push:
     branches:
-      - main  # Change if your default branch is different
+      - main  # Change this if your default branch is different
 
 jobs:
   deploy:
@@ -29,3 +29,4 @@ jobs:
         with:
           branch: gh-pages
           folder: dist
+          clean: true
