@@ -1,9 +1,9 @@
-name: Deploy Vue + p5.js to GitHub Pages
+name: Deploy Vue Project (h1) to GitHub Pages
 
 on:
   push:
     branches:
-      - main  # Change if your branch is different
+      - main
 
 jobs:
   deploy:
@@ -17,9 +17,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-
-      - name: Change to h3 directory
-        run: cd h1
 
       - name: Install dependencies
         run: |
@@ -35,4 +32,4 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
-          folder: h1/dist  # Adjust the path if needed
+          folder: h1/dist # Correct path for subproject
