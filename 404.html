@@ -13,6 +13,11 @@
     <div id="app">
         <router-view></router-view>
     </div>
+<script>
+  var path = window.location.pathname;
+  var redirect = '/' + path.split('/').slice(2).join('/');
+  window.location.replace(window.location.origin + redirect);
+</script>
 
     <script type="module">
         import Sell from "./src/sell.js";
