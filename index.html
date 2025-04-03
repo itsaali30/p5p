@@ -151,7 +151,7 @@
 
         // Importing Components
 
-        import BNav from BottomNavbar.js;
+        import BNav from ./src/BottomNavbar.js;
         import Home from "./src/home.js";
         import Sell from "./src/sell.js";
         const Account = { template: '<h2>Account Page</h2>' };
@@ -183,6 +183,7 @@
                     return store.state.pageTitle;
                 }
             }
+            components: { BNav }
         });
 
         app.use(store);
