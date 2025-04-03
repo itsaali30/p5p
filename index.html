@@ -65,6 +65,7 @@
         .profile-slide-menu { left: 0; transform: translateX(-100%); }
         .side-slide-menu { right: 0; transform: translateX(100%); }
         .slide-menu.active { transform: translateX(0); }
+
         .bottom-nav {
     position: fixed;
     bottom: 0;
@@ -83,15 +84,16 @@
     text-align: center;
     flex-grow: 1;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: 14px; /* Adjust text size */
+    font-size: 12px; /* Adjust text size */
     transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
 .bottom-nav a i {
     font-size: 20px; /* Adjust icon size */
-    margin-right: 10px; /* Minimal spacing between icon & text */
+    margin-bottom: 3px; /* Small space between icon & text */
 }
 
 .bottom-nav a:hover {
