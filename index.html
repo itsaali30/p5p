@@ -121,6 +121,10 @@
     </div>
 
     <script type="module">
+        import { createApp } from "vue";
+        import { createRouter, createWebHistory } from "vue-router";
+        import { createStore } from "vuex";
+
         import BNav from "./src/BottomNavbar.js";
         import Home from "./src/home.js";
         import Sell from "./src/sell.js";
@@ -129,7 +133,8 @@
         const Buy = { template: '<h2>Buy Page</h2>' };
         const Transactions = { template: '<h2>Transactions Page</h2>' };
 
-        const store = Vuex.createStore({
+        // Vuex Store
+        const store = createStore({
             state() {
                 return { 
                     showProfileMenu: false, 
@@ -157,8 +162,9 @@
             }
         });
 
-        const router = VueRouter.createRouter({
-            history: VueRouter.createWebHistory(),
+        // Vue Router
+        const router = createRouter({
+            history: createWebHistory(),
             routes: [
                 { path: '/', component: Home, meta: { title: "Home" } },
                 { path: '/account', component: Account, meta: { title: "Account" } },
@@ -170,22 +176,31 @@
 
         // Update title dynamically
         router.beforeEach((to, from, next) => {
-            store.commit('setTitle', to.meta.title || "Alifmart Co.");
+            const title = to.meta.title || "Alifmart Co.";
+            store.commit('setTitle', title);
             next();
         });
 
-        const app = Vue.createApp({
+        // Vue App Initialization
+        const app = createApp({
             computed: {
                 pageTitle() {
                     return store.state.pageTitle;
                 }
-            },
-            
+            }
         });
-        app.component('BNav', BNav);
+
+        // Register Global Components
+        app.component("BNav", BNav);
+        app.component("Home", Home);
+        app.component("Sell", Sell);
+
+        // Use Vuex and Vue Router
         app.use(store);
         app.use(router);
-        app.mount("#app");
+
+        // Mount the app
+        app.mount('#app');
     </script>
 </body>
 </html>
