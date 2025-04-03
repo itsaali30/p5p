@@ -1,20 +1,16 @@
 export default {
     template: `
-        <div>
-            <h2>Sell Page</h2>
-            <p>Sell your products here.</p>
-            <button @click="showAlert">Click Me</button>
+        <div class="text-center">
+            <h2 class="mb-3">Sell Your Products</h2>
+            <p>Earn more by selling your products on 5Earn.</p>
+            <button class="btn btn-primary" @click="sellNow">
+                <i class="fas fa-store"></i> Start Selling
+            </button>
         </div>
     `,
-    mounted() {
-        this.sellMounted();
-    },
     methods: {
-        sellMounted() {
-            alert(0);
-        },
-        showAlert() {
-            alert("Button clicked!");
+        sellNow() {
+            alert("Get started with selling!");
         }
     }
 };
