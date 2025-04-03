@@ -114,13 +114,7 @@
             </div>
 
             <!-- Bottom Navigation -->
-            <div class="bottom-nav">
-                <router-link to="/">Home</router-link>
-                <router-link to="/account">Account</router-link>
-                <router-link to="/buy">Buy</router-link>
-                <router-link to="/sell">Sell</router-link>
-                <router-link to="/transactions">Transactions</router-link>
-            </div>
+            <BNav />
         </div>
 
         <router-view></router-view>
@@ -156,6 +150,8 @@
         });
 
         // Importing Components
+
+        import BNav from BottomNavbar.js
         import Home from "./src/home.js";
         import Sell from "./src/sell.js";
         const Account = { template: '<h2>Account Page</h2>' };
