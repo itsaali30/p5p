@@ -66,40 +66,44 @@
         .side-slide-menu { right: 0; transform: translateX(100%); }
         .slide-menu.active { transform: translateX(0); }
         .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background: linear-gradient(90deg, #ff8a00, #e52e71);
-            display: flex;
-            justify-content: space-around;
-            padding: 10px 0;
-            z-index: 999;
-        }
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background: linear-gradient(90deg, #ff8a00, #e52e71);
-            display: flex;
-            justify-content: space-around;
-            padding: 10px 0;
-            box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.5);
-            z-index: 2;
-        }
-        .bottom-nav a {
-            color: white;
-            text-decoration: none;
-            text-align: center;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            transition: transform 0.3s, color 0.3s;
-        }
-        .bottom-nav a:hover {
-            transform: scale(1.1);
-            color: #ffd700;
-        }
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: linear-gradient(90deg, #ff8a00, #e52e71);
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+
+.bottom-nav a {
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 14px; /* Ensures text is readable */
+    transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.bottom-nav a i {
+    font-size: 20px; /* Adjust icon size */
+    margin-bottom: 3px;
+}
+
+.bottom-nav a:hover {
+    transform: translateY(-3px); /* Creates a subtle lift effect */
+    color: #ffd700; /* Gold color on hover */
+}
+
+.bottom-nav a.active {
+    font-weight: bold;
+    color: #ffd700;
+}
+
 
     </style>
 </head>
