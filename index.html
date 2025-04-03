@@ -114,27 +114,20 @@
             </div>
 
             <!-- Bottom Navigation -->
-            <BNav />
+            <div class="bottom-nav">
+                <router-link to="/">Home</router-link>
+                <router-link to="/account">Account</router-link>
+                <router-link to="/buy">Buy</router-link>
+                <router-link to="/sell">Sell</router-link>
+                <router-link to="/transactions">Transactions</router-link>
+            </div>
         </div>
 
         <router-view></router-view>
     </div>
 
     <script type="module">
-        import { createApp } from "vue";
-        import { createRouter, createWebHistory } from "vue-router";
-        import { createStore } from "vuex";
-
-        import BNav from "./src/BottomNavbar.js";
-        import Home from "./src/home.js";
-        import Sell from "./src/sell.js";
-
-        const Account = { template: '<h2>Account Page</h2>' };
-        const Buy = { template: '<h2>Buy Page</h2>' };
-        const Transactions = { template: '<h2>Transactions Page</h2>' };
-
-        // Vuex Store
-        const store = createStore({
+        const store = Vuex.createStore({
             state() {
                 return { 
                     showProfileMenu: false, 
@@ -162,9 +155,16 @@
             }
         });
 
-        // Vue Router
-        const router = createRouter({
-            history: createWebHistory(),
+        // Importing Components
+        import Home from "./src/home.js";
+        import Sell from "./src/sell.js";
+        const Account = { template: '<h2>Account Page</h2>' };
+        const Buy = { template: '<h2>Buy Page</h2>' };
+        const Transactions = { template: '<h2>Transactions Page</h2>' };
+
+        // Router
+        const router = VueRouter.createRouter({
+            history: VueRouter.createWebHistory(),
             routes: [
                 { path: '/', component: Home, meta: { title: "Home" } },
                 { path: '/account', component: Account, meta: { title: "Account" } },
@@ -181,8 +181,7 @@
             next();
         });
 
-        // Vue App Initialization
-        const app = createApp({
+        const app = Vue.createApp({
             computed: {
                 pageTitle() {
                     return store.state.pageTitle;
@@ -190,16 +189,8 @@
             }
         });
 
-        // Register Global Components
-        app.component("BNav", BNav);
-        app.component("Home", Home);
-        app.component("Sell", Sell);
-
-        // Use Vuex and Vue Router
         app.use(store);
         app.use(router);
-
-        // Mount the app
         app.mount('#app');
     </script>
 </body>
