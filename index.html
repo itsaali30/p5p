@@ -13,12 +13,7 @@
     <div id="app">
         <router-view></router-view>
     </div>
-    <script type="module">
-    if (window.location.search.includes("redirect=")) {
-        const newPath = window.location.search.split("redirect=")[1];
-        history.replaceState(null, "", newPath);
-    }
-</script>
+    
 
 
     <script type="module">
