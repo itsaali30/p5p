@@ -77,11 +77,9 @@ export default {
     },
     methods: {
         buyCoins() {
-            alert("You bought 5ERN coins with a 10% bonus!");
-        },
+            this.$router.push('/buy');    },
         sellKeys() {
-            alert("You sold your star keys for 100ERN with a 5% guaranteed profit!");
-        },
+            this.$router.push('/sell');    },
         closeSideMenu() {
             this.sideMenuOpen = false;
         }
