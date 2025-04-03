@@ -180,9 +180,9 @@
                     return store.state.pageTitle;
                 }
             },
-            components: { BNav }
+            
         });
-
+        app.component('BNav', BNav);
         app.use(store);
         app.use(router);
         app.mount("#app");
