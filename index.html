@@ -97,8 +97,19 @@
 
 .bottom-nav a i {
     font-size: 20px;
-    margin-bottom: 2px;
+    margin-bottom: 0; /* Remove space between icon and text */
 }
+
+.bottom-nav .label {
+    display: none;
+    margin-top: 0; /* No space between icon and text */
+    line-height: 1; /* Optional: tighter text line spacing */
+}
+
+.bottom-nav a.show-label .label {
+    display: block;
+}
+
 
 .bottom-nav a:hover {
     transform: translateY(-3px);
@@ -110,14 +121,7 @@
     color: #ffd700;
 }
 
-.bottom-nav .label {
-    display: none;
-    margin-top: 2px;
-}
 
-.bottom-nav a.show-label .label {
-    display: block;
-}
 
 
 
