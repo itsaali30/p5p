@@ -217,6 +217,10 @@
         // Importing Components
         import Home from "./src/home.js";
         import Sell from "./src/sell.js";
+        import Login from "./src/Login.js";
+
+
+
         const Account = { template: '<h2>Account Page</h2>' };
         const Buy = { template: '<h2>Buy Page</h2>' };
         const Transactions = { template: '<h2>Transactions Page</h2>' };
@@ -229,6 +233,8 @@
                 { path: '/account', component: Account, meta: { title: "Account" } },
                 { path: '/buy', component: Buy, meta: { title: "Buy" } },
                 { path: '/sell', component: Sell, meta: { title: "Sell" } },
+                { path: '/login', component: Login, meta: { title: "Login" } }
+            ]
                 { path: '/transactions', component: Transactions, meta: { title: "Transactions" } }
             ]
         });
