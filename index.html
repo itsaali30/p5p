@@ -173,7 +173,14 @@
         return { 
           showProfileMenu: false, 
           showSideMenu: false,
-          pageTitle: "Alifmart Co."
+          pageTitle: "5earn co.",
+          products: [
+        { id: 1, name: "Laptop", price: 999, description: "High-end laptop" },
+        { id: 2, name: "Smartphone", price: 499, description: "Latest smartphone" },
+        { id: 3, name: "Headphones", price: 199, description: "Noise cancelling headphones" },
+      ],
+      cart: [],
+          
         };
       },
       mutations: {
@@ -192,7 +199,25 @@
         setTitle(state, title) {
           state.pageTitle = title;
           document.title = title;
+        },
+        addToCart(state, product) {
+      const existing = state.cart.find(p => p.id === product.id);
+      if (existing) {
+        existing.qty++;
+      } else {
+        state.cart.push({ ...product, qty: 1 });
+      }
+    },
+        removeFromCart(state, product) {
+      const index = state.cart.findIndex(p => p.id === product.id);
+      if (index !== -1) {
+        if (state.cart[index].qty > 1) {
+          state.cart[index].qty--;
+        } else {
+          state.cart.splice(index, 1);
         }
+      } 
+         }
       }
     });
 
@@ -237,37 +262,7 @@
     });
 
     const app = Vue.createApp({
-      data() {
-    return {
-      products: [
-        { id: 1, name: "Laptop", price: 999, description: "High-end laptop" },
-        { id: 2, name: "Smartphone", price: 499, description: "Latest smartphone" },
-        { id: 3, name: "Headphones", price: 199, description: "Noise cancelling headphones" },
-      ],
-      cart: [],
-    };
-  },provide() {
-    return {
-      cart: this.cart,
-      addToCart: (product) => {
-        const existing = this.cart.find(p => p.id === product.id);
-        if (existing) {
-          existing.qty++;
-        } else {
-          this.cart.push({ ...product, qty: 1 });
-        }
-      },
-      removeFromCart: (product) => {
-        const index = this.cart.findIndex(p => p.id === product.id);
-        if (index !== -1) {
-          if (this.cart[index].qty > 1) {
-            this.cart[index].qty--;
-          } else {
-            this.cart.splice(index, 1);
-          }
-        }
-      }
-    };},
+      
       
       computed: {
         pageTitle() {
