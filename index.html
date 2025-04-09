@@ -201,6 +201,10 @@
     import Sell from "./src/sell.js";
     import Login from "./src/Login.js";
     import Signup from "./src/Signup.js";
+    import Shop from "./src/Shop.js";
+    import ItemView from "./src/itemview.js";
+    import Cart from "./src/Cart.js";
+    import Payment from "./src/Payment.js";
 
     const Account = { template: '<h2>Account Page</h2>' };
     const Buy = { template: '<h2>Buy Page</h2>' };
@@ -216,8 +220,12 @@
         { path: '/sell', component: Sell, meta: { title: "Sell" } },
         { path: '/login', component: Login, meta: { title: "Login" } },
        { path: '/signup', component: Signup, meta: { title: "Signup" } },
-       
-        { path: '/transactions', component: Transactions, meta: { title: "Transactions" } }
+        { path: '/transactions', component: Transactions, meta: { title: "Transactions" } },
+  { path: '/shop', component: Shop },
+  { path: '/item/:id', component: ItemView, props: true },
+  { path: '/cart', component: Cart },
+  { path: '/payment', component: Payment },
+
       ]
     });
 
@@ -229,6 +237,38 @@
     });
 
     const app = Vue.createApp({
+      data() {
+    return {
+      products: [
+        { id: 1, name: "Laptop", price: 999, description: "High-end laptop" },
+        { id: 2, name: "Smartphone", price: 499, description: "Latest smartphone" },
+        { id: 3, name: "Headphones", price: 199, description: "Noise cancelling headphones" },
+      ],
+      cart: [],
+    };
+  },provide() {
+    return {
+      cart: this.cart,
+      addToCart: (product) => {
+        const existing = this.cart.find(p => p.id === product.id);
+        if (existing) {
+          existing.qty++;
+        } else {
+          this.cart.push({ ...product, qty: 1 });
+        }
+      },
+      removeFromCart: (product) => {
+        const index = this.cart.findIndex(p => p.id === product.id);
+        if (index !== -1) {
+          if (this.cart[index].qty > 1) {
+            this.cart[index].qty--;
+          } else {
+            this.cart.splice(index, 1);
+          }
+        }
+      }
+    };},
+      
       computed: {
         pageTitle() {
           return store.state.pageTitle;
