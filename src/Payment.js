@@ -1,6 +1,8 @@
 export default {
-  inject: ['cart'],
   computed: {
+    cart() {
+      return this.$store.state.cart;
+    },
     total() {
       return this.cart.reduce((sum, p) => sum + p.price * p.qty, 0);
     }
@@ -8,7 +10,7 @@ export default {
   methods: {
     pay() {
       alert("Payment successful!");
-      this.cart.length = 0;
+      this.$store.state.cart.length = 0; // Optional: use mutation if preferred
       this.$router.push("/");
     }
   },
