@@ -9,7 +9,7 @@ export default {
             <div class="card-body d-flex flex-column">
               <h5>{{ product.name }}</h5>
               <p>\${{ product.price }}</p>
-              <router-link :to="'/product/' + product.id" class="btn btn-primary mt-auto">View</router-link>
+              <router-link :to="'/item/' + product.id" class="btn btn-primary mt-auto">View</router-link>
             </div>
           </div>
         </div>
@@ -21,7 +21,9 @@ export default {
   },
   computed: {
     filtered() {
-      return this.$root.products.filter(p => p.name.toLowerCase().includes(this.search.toLowerCase()));
+      return this.$store.state.products.filter(p => 
+        p.name.toLowerCase().includes(this.search.toLowerCase())
+      );
     }
   }
 };
