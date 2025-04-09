@@ -1,16 +1,18 @@
 export default {
-  inject: ['cart', 'addToCart', 'removeFromCart'],
   computed: {
+    cart() {
+      return this.$store.state.cart;
+    },
     total() {
       return this.cart.reduce((sum, item) => sum + item.price * item.qty, 0);
     }
   },
   methods: {
     increaseQty(item) {
-      this.addToCart(item);
+      this.$store.commit('addToCart', item);
     },
     decreaseQty(item) {
-      this.removeFromCart(item);
+      this.$store.commit('removeFromCart', item);
     }
   },
   template: `
@@ -31,7 +33,7 @@ export default {
         </li>
       </ul>
       <p v-if="cart.length"><strong>Total: \${{ total }}</strong></p>
-      <router-link to="/checkout" class="btn btn-primary" v-if="cart.length">Proceed to Checkout</router-link>
+      <router-link to="/payment" class="btn btn-primary" v-if="cart.length">Proceed to Payment</router-link>
     </div>
   `
 };
