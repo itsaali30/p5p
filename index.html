@@ -254,23 +254,17 @@
         { path: '/signup', component: Signup, meta: { title: "Signup" } },
         { path: '/transactions', component: Transactions, meta: { title: "Transactions" } },
         { path: '/shop', component: Shop,meta: { title: "Shop" } },
-        { path: '/item/:id', component: ItemView,meta: { title: 'Item View' }, props: true },
+        { path: '/item/:id', component: ItemView,meta: { title: "Item View" }, props: true },
         { path: '/cart', component: Cart,meta: { title: "Cart" } },
         { path: '/payment', component: Payment ,meta: { title: "payment" }}
       ]
     });
 
     router.beforeEach((to, from, next) => {
-  let title = to.meta.title || "5earn Co.";
-
-  if (to.path.startsWith('/item/') && to.params.id) {
-    const product = store.state.products.find(p => p.id == to.params.id);
-    if (product) title = product.name;
-  }
-
-  store.commit('setTitle', title);
-  next();
-});
+      const title = to.meta.title || "5earn Co.";
+      store.commit('setTitle', title);
+      next();
+    });
 
 
     const app = Vue.createApp({
