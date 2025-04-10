@@ -5,7 +5,7 @@ export default {
             <div class="offcanvas-backdrop fade show" v-if="sideMenuOpen" @click="closeSideMenu"></div>
             
             <!-- Carousel Section -->
-            <div id="tradingCarousel" class="carousel slide mb-4" data-bs-ride="carousel">
+            <div id="tradingCarousel" class="carousel slide mb-4 p-4" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <img src="https://res.cloudinary.com/mandmshop/image/upload/v1733605195/caps.jpg" class="d-block w-100 rounded" alt="AI Trading">
