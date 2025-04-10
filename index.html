@@ -156,15 +156,25 @@
           <i class="fas fa-hand-holding-usd" @click="$router.push('/buy')"></i>
           <span class="label">Buy</span>
         </div>
-        <div class="nav-item position-relative">
-          <i class="fas fa-shopping-cart" @click="$router.push('/cart')"></i>
-          <span class="cart-badge" v-if="totalCartItems > 0">{{ totalCartItems }}</span>
-          <span class="label">Cart</span>
-        </div>
+        
         <div class="nav-item">
-          <i class="fas fa-history" @click="$router.push('/history')"></i>
-          <span class="label">History</span>
-        </div>
+  <i class="fas fa-shopping-cart" @click="$router.push('/shop')"></i>
+  <span class="label">Shop</span>
+</div>
+ <div class="nav-item" v-if="$store.state.cart.length > 0">
+  <i class="fas fa-shopping-cart position-relative" @click="$router.push('/cart')">
+    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+      {{ $store.state.cart.length }}
+    </span>
+  </i>
+  <span class="label">Cart</span>
+</div>
+<div class="nav-item" v-else>
+  <i class="fas fa-history" @click="$router.push('/history')"></i>
+  <span class="label">History</span>
+</div>
+
+        
       </div>
     </div>
 
