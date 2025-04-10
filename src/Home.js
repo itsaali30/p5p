@@ -8,21 +8,21 @@ export default {
             <div id="tradingCarousel" class="carousel slide mb-4" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="/aseets/logo.jpg" class="d-block w-100 rounded" alt="AI Trading">
+                        <img src="https://res.cloudinary.com/mandmshop/image/upload/v1733605195/caps.jpg" class="d-block w-100 rounded" alt="AI Trading">
                         <div class="carousel-caption d-none d-md-block">
                             <h5>AI-Powered Trading</h5>
                             <p>Maximize your profits with our advanced AI algorithms.</p>
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img src="/images/trading2.jpg" class="d-block w-100 rounded" alt="Buy & Earn">
+                        <img src="https://res.cloudinary.com/mandmshop/image/upload/v1733605195/super.jpg" class="d-block w-100 rounded" alt="Buy & Earn">
                         <div class="carousel-caption d-none d-md-block">
                             <h5>Earn More with 5ERN</h5>
                             <p>Get a 10% bonus on every purchase.</p>
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img src="/aseets/logo.jpg" class="d-block w-100 rounded" alt="Secure & Reliable">
+                        <img src="https://res.cloudinary.com/mandmshop/image/upload/v1733605195/iron.jpg" class="d-block w-100 rounded" alt="Secure & Reliable">
                         <div class="carousel-caption d-none d-md-block">
                             <h5>Secure & Reliable</h5>
                             <p>Guaranteed returns with our AI-driven investment system.</p>
