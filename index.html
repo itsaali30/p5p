@@ -78,36 +78,39 @@
       z-index: 1000;
       color: white;
     }
-
     .nav-item {
-      position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       font-size: 14px;
+      padding: 0;
       color: white;
-      width: 20%;
+      transition: transform 0.3s, color 0.3s;
     }
-
     .nav-item i {
       font-size: 20px;
       cursor: pointer;
+      color: white;
       transition: color 0.2s, transform 0.2s;
     }
-
     .nav-item i:hover {
       color: #ffd700;
       transform: translateY(-12px);
     }
-
     .nav-item i:active {
       color: #ffd700;
       transform: translateY(-26px);
     }
-
-    .badge {
-      font-size: 0.6rem;
+    .cart-badge {
+      position: absolute;
+      top: 0;
+      right: 6px;
+      background-color: red;
+      color: white;
+      border-radius: 50%;
+      font-size: 12px;
+      padding: 2px 6px;
     }
   </style>
 </head>
@@ -120,7 +123,6 @@
         <i class="fas fa-bars" @click.stop="$store.commit('toggleSideMenu')"></i>
       </div>
 
-      <!-- Profile Menu -->
       <div class="slide-menu profile-slide-menu" :class="{ active: $store.state.showProfileMenu }" @click.self="$store.commit('closeMenus')">
         <h4>Profile Menu</h4>
         <router-link to="/profile">Edit Profile</router-link>
@@ -131,7 +133,6 @@
         <router-link to="/wallet">Star Wallet</router-link>
       </div>
 
-      <!-- Side Menu -->
       <div class="slide-menu side-slide-menu" :class="{ active: $store.state.showSideMenu }" @click.self="$store.commit('closeMenus')">
         <h4>Menu</h4>
         <router-link to="/login">Login</router-link>
@@ -142,31 +143,27 @@
         <router-link to="/transactions">Transactions</router-link>
       </div>
 
-      <!-- Bottom Navigation -->
       <div class="bottom-nav">
-        <div class="nav-item" @click="$router.push('/')">
-          <i class="fas fa-home"></i>
-          <span>Home</span>
+        <div class="nav-item">
+          <i class="fas fa-home" @click="$router.push('/')"></i>
+          <span class="label">Home</span>
         </div>
-        <div class="nav-item" @click="$router.push('/wallet')">
-          <i class="fas fa-wallet"></i>
-          <span>Wallet</span>
+        <div class="nav-item">
+          <i class="fas fa-wallet" @click="$router.push('/wallet')"></i>
+          <span class="label">Wallet</span>
         </div>
-        <div class="nav-item" @click="$router.push('/buy')">
-          <i class="fas fa-hand-holding-usd"></i>
-          <span>Buy</span>
+        <div class="nav-item">
+          <i class="fas fa-hand-holding-usd" @click="$router.push('/buy')"></i>
+          <span class="label">Buy</span>
         </div>
-        <div class="nav-item" @click="$router.push('/shop')">
-          <i class="fas fa-shopping-cart position-relative">
-            <span v-if="totalCartItems > 0" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-              {{ totalCartItems }}
-            </span>
-          </i>
-          <span>Shop</span>
+        <div class="nav-item position-relative">
+          <i class="fas fa-shopping-cart" @click="$router.push('/cart')"></i>
+          <span class="cart-badge" v-if="totalCartItems > 0">{{ totalCartItems }}</span>
+          <span class="label">Cart</span>
         </div>
-        <div class="nav-item" @click="$router.push('/history')">
-          <i class="fas fa-history"></i>
-          <span>History</span>
+        <div class="nav-item">
+          <i class="fas fa-history" @click="$router.push('/history')"></i>
+          <span class="label">History</span>
         </div>
       </div>
     </div>
@@ -174,119 +171,112 @@
     <router-view></router-view>
   </div>
 
-<script type="module">
-  // Vuex Store Setup
-  const store = Vuex.createStore({
-    state() {
-      return {
-        showProfileMenu: false,
-        showSideMenu: false,
-        pageTitle: "5earn co.",
-        products: [
-          { id: 1, name: "Laptop", price: 999, description: "High-end laptop" },
-          { id: 2, name: "Smartphone", price: 499, description: "Latest smartphone" },
-          { id: 3, name: "Headphones", price: 199, description: "Noise cancelling headphones" }
-        ],
-        cart: []
-      };
-    },
-    mutations: {
-      toggleProfileMenu(state) {
-        state.showProfileMenu = !state.showProfileMenu;
-        state.showSideMenu = false;
+  <script type="module">
+    const store = Vuex.createStore({
+      state() {
+        return {
+          showProfileMenu: false,
+          showSideMenu: false,
+          pageTitle: "5earn co.",
+          products: [
+            { id: 1, name: "Laptop", price: 999, description: "High-end laptop" },
+            { id: 2, name: "Smartphone", price: 499, description: "Latest smartphone" },
+            { id: 3, name: "Headphones", price: 199, description: "Noise cancelling headphones" }
+          ],
+          cart: []
+        };
       },
-      toggleSideMenu(state) {
-        state.showSideMenu = !state.showSideMenu;
-        state.showProfileMenu = false;
-      },
-      closeMenus(state) {
-        state.showProfileMenu = false;
-        state.showSideMenu = false;
-      },
-      setTitle(state, title) {
-        state.pageTitle = title;
-        document.title = title;
-      },
-      addToCart(state, product) {
-        const existing = state.cart.find(p => p.id === product.id);
-        if (existing) {
-          existing.qty++;
-        } else {
-          state.cart.push({ ...product, qty: 1 });
-        }
-      },
-      removeFromCart(state, product) {
-        const index = state.cart.findIndex(p => p.id === product.id);
-        if (index !== -1) {
-          if (state.cart[index].qty > 1) {
-            state.cart[index].qty--;
+      mutations: {
+        toggleProfileMenu(state) {
+          state.showProfileMenu = !state.showProfileMenu;
+          state.showSideMenu = false;
+        },
+        toggleSideMenu(state) {
+          state.showSideMenu = !state.showSideMenu;
+          state.showProfileMenu = false;
+        },
+        closeMenus(state) {
+          state.showProfileMenu = false;
+          state.showSideMenu = false;
+        },
+        setTitle(state, title) {
+          state.pageTitle = title;
+          document.title = title;
+        },
+        addToCart(state, product) {
+          const existing = state.cart.find(p => p.id === product.id);
+          if (existing) {
+            existing.qty++;
           } else {
-            state.cart.splice(index, 1);
+            state.cart.push({ ...product, qty: 1 });
+          }
+        },
+        removeFromCart(state, product) {
+          const index = state.cart.findIndex(p => p.id === product.id);
+          if (index !== -1) {
+            if (state.cart[index].qty > 1) {
+              state.cart[index].qty--;
+            } else {
+              state.cart.splice(index, 1);
+            }
           }
         }
       }
-    }
-  });
+    });
 
-  // Components
-  import Home from "./src/home.js";
-  import Sell from "./src/sell.js";
-  import Login from "./src/Login.js";
-  import Signup from "./src/Signup.js";
-  import Shop from "./src/Shop.js";
-  import ItemView from "./src/itemview.js";
-  import Cart from "./src/Cart.js";
-  import Payment from "./src/Payment.js";
+    import Home from "./src/home.js";
+    import Sell from "./src/sell.js";
+    import Login from "./src/Login.js";
+    import Signup from "./src/Signup.js";
+    import Shop from "./src/Shop.js";
+    import ItemView from "./src/itemview.js";
+    import Cart from "./src/Cart.js";
+    import Payment from "./src/Payment.js";
 
-  const Account = { template: '<h2>Account Page</h2>' };
-  const Buy = { template: '<h2>Buy Page</h2>' };
-  const Transactions = { template: '<h2>Transactions Page</h2>' };
+    const Account = { template: '<h2>Account Page</h2>' };
+    const Buy = { template: '<h2>Buy Page</h2>' };
+    const Transactions = { template: '<h2>Transactions Page</h2>' };
 
-  // Vue Router Setup
-  const router = VueRouter.createRouter({
-    history: VueRouter.createWebHistory(),
-    routes: [
-      { path: '/', component: Home, meta: { title: "Home" } },
-      { path: '/account', component: Account, meta: { title: "Account" } },
-      { path: '/buy', component: Buy, meta: { title: "Buy" } },
-      { path: '/sell', component: Sell, meta: { title: "Sell" } },
-      { path: '/login', component: Login, meta: { title: "Login" } },
-      { path: '/signup', component: Signup, meta: { title: "Signup" } },
-      { path: '/transactions', component: Transactions, meta: { title: "Transactions" } },
-      { path: '/shop', component: Shop },
-      { path: '/item/:id', component: ItemView, props: true },
-      { path: '/cart', component: Cart },
-      { path: '/payment', component: Payment }
-    ]
-  });
+    const router = VueRouter.createRouter({
+      history: VueRouter.createWebHistory(),
+      routes: [
+        { path: '/', component: Home, meta: { title: "Home" } },
+        { path: '/account', component: Account, meta: { title: "Account" } },
+        { path: '/buy', component: Buy, meta: { title: "Buy" } },
+        { path: '/sell', component: Sell, meta: { title: "Sell" } },
+        { path: '/login', component: Login, meta: { title: "Login" } },
+        { path: '/signup', component: Signup, meta: { title: "Signup" } },
+        { path: '/transactions', component: Transactions, meta: { title: "Transactions" } },
+        { path: '/shop', component: Shop },
+        { path: '/item/:id', component: ItemView, props: true },
+        { path: '/cart', component: Cart },
+        { path: '/payment', component: Payment }
+      ]
+    });
 
-  // Set Page Title on Route Change
-  router.beforeEach((to, from, next) => {
-    const title = to.meta.title || "Alifmart Co.";
-    store.commit('setTitle', title);
-    next();
-  });
+    router.beforeEach((to, from, next) => {
+      const title = to.meta.title || "Alifmart Co.";
+      store.commit('setTitle', title);
+      next();
+    });
 
-  // Vue App Setup
-  const app = Vue.createApp({
-    computed: {
-      pageTitle() {
-        return store.state.pageTitle;
-      },
-      cart() {
-        return store.state.cart;
-      },
-      totalCartItems() {
-        return this.cart.reduce((sum, item) => sum + item.qty, 0);
+    const app = Vue.createApp({
+      computed: {
+        pageTitle() {
+          return store.state.pageTitle;
+        },
+        cart() {
+          return store.state.cart;
+        },
+        totalCartItems() {
+          return this.cart.reduce((sum, item) => sum + item.qty, 0);
+        }
       }
-    }
-  });
+    });
 
-  // Mount App
-  app.use(store);
-  app.use(router);
-  app.mount('#app');
-</script>
-
+    app.use(store);
+    app.use(router);
+    app.mount('#app');
+  </script>
 </body>
 </html>
