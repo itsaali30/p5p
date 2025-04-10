@@ -162,7 +162,7 @@
   <span class="label">Shop</span>
 </div>
  <div class="nav-item" v-if="$store.state.cart.length > 0">
-  <i class="fas fa-shopping-cart position-relative" @click="$router.push('/cart')">
+  <i class="fas fa-shopping-basket position-relative" @click="$router.push('/cart')">
     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
       {{ $store.state.cart.length }}
     </span>
