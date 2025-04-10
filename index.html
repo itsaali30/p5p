@@ -80,6 +80,7 @@
     }
 
     .nav-item {
+      position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -105,6 +106,10 @@
     .nav-item i:active {
       color: #ffd700;
       transform: translateY(-26px);
+    }
+
+    .badge {
+      font-size: 10px;
     }
   </style>
 </head>
@@ -141,31 +146,29 @@
 
       <!-- Bottom Navigation -->
       <div class="bottom-nav">
-        <div class="nav-item">
-          <i class="fas fa-home" @click="$router.push('/')"></i>
+        <div class="nav-item" @click="$router.push('/')">
+          <i class="fas fa-home"></i>
           <span class="label">Home</span>
         </div>
-        <div class="nav-item">
-          <i class="fas fa-wallet" @click="$router.push('/wallet')"></i>
+        <div class="nav-item" @click="$router.push('/wallet')">
+          <i class="fas fa-wallet"></i>
           <span class="label">Wallet</span>
         </div>
-        <div class="nav-item">
-          <i class="fas fa-hand-holding-usd" @click="$router.push('/buy')"></i>
+        <div class="nav-item" @click="$router.push('/buy')">
+          <i class="fas fa-hand-holding-usd"></i>
           <span class="label">Buy</span>
         </div>
-        <div class="nav-item">
-          <i class="fas fa-store" @click="$router.push('/shop')"></i>
-          <span class="label">Shop</span>
+        <div class="nav-item position-relative" @click="$router.push('/cart')">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="label">Cart</span>
+          <span v-if="totalCartItems" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            {{ totalCartItems }}
+          </span>
         </div>
-        
-        <div class="nav-item text-center position-relative" @click="handleCartClick">
-  <i :class="cart.length ? 'fas fa-shopping-cart' : 'fas fa-history'"></i><br>
-  <span>{{ cart.length ? 'Cart' : 'History' }}</span>
-  <span v-if="cart.length" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-    {{ totalCartItems }}
-  </span>
-</div>
-
+        <div class="nav-item" @click="$router.push('/history')">
+          <i class="fas fa-history"></i>
+          <span class="label">History</span>
+        </div>
       </div>
     </div>
 
@@ -175,8 +178,8 @@
   <script type="module">
     const store = Vuex.createStore({
       state() {
-        return {
-          showProfileMenu: false,
+        return { 
+          showProfileMenu: false, 
           showSideMenu: false,
           pageTitle: "5earn co.",
           products: [
@@ -225,6 +228,7 @@
       }
     });
 
+    // Import components
     import Home from "./src/home.js";
     import Sell from "./src/sell.js";
     import Login from "./src/Login.js";
@@ -237,7 +241,6 @@
     const Account = { template: '<h2>Account Page</h2>' };
     const Buy = { template: '<h2>Buy Page</h2>' };
     const Transactions = { template: '<h2>Transactions Page</h2>' };
-    const History = { template: '<h2>History Page</h2>' };
 
     const router = VueRouter.createRouter({
       history: VueRouter.createWebHistory(),
@@ -252,8 +255,7 @@
         { path: '/shop', component: Shop },
         { path: '/item/:id', component: ItemView, props: true },
         { path: '/cart', component: Cart },
-        { path: '/payment', component: Payment },
-        { path: '/history', component: History }
+        { path: '/payment', component: Payment }
       ]
     });
 
@@ -266,22 +268,13 @@
     const app = Vue.createApp({
       computed: {
         pageTitle() {
-          return this.$store.state.pageTitle;
+          return store.state.pageTitle;
         },
         cart() {
-          return this.$store.state.cart;
+          return store.state.cart;
         },
         totalCartItems() {
-    return this.cart.reduce((sum, item) => sum + item.qty, 0);
-  },
-      },
-      methods: {
-        handleCartClick() {
-          if (this.cart.length) {
-            this.$router.push('/cart');
-          } else {
-            this.$router.push('/history');
-          }
+          return this.cart.reduce((sum, item) => sum + item.qty, 0);
         }
       }
     });
