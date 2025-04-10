@@ -188,13 +188,7 @@
           showProfileMenu: false,
           showSideMenu: false,
           pageTitle: "5earn co.",
-          products: [
-        { id: 1, name: "Analytics", desc: "Powerful insights and reports", icon: "fa-chart-line", price: 29.99 },
-        { id: 2, name: "Security", desc: "Top-level protection features", icon: "fa-shield-alt", price: 19.49 },
-        { id: 3, name: "Cloud Sync", desc: "Keep your data synced", icon: "fa-cloud", price: 24.75 },
-        { id: 4, name: "Payments", desc: "Easy and secure transactions", icon: "fa-credit-card", price: 49.00 },
-        { id: 5, name: "Support", desc: "24/7 customer service", icon: "fa-headset", price: 15.00 }
-      ],
+          
           cart: []
         };
       },
@@ -259,18 +253,25 @@
         { path: '/login', component: Login, meta: { title: "Login" } },
         { path: '/signup', component: Signup, meta: { title: "Signup" } },
         { path: '/transactions', component: Transactions, meta: { title: "Transactions" } },
-        { path: '/shop', component: Shop },
-        { path: '/item/:id', component: ItemView, props: true },
-        { path: '/cart', component: Cart },
-        { path: '/payment', component: Payment }
+        { path: '/shop', component: Shop,meta: { title: "Shop" } },
+        { path: '/item/:id', component: ItemView,meta: { title: 'Item View' }, props: true },
+        { path: '/cart', component: Cart,meta: { title: "Cart" } },
+        { path: '/payment', component: Payment ,meta: { title: "payment" }}
       ]
     });
 
     router.beforeEach((to, from, next) => {
-      const title = to.meta.title || "Alifmart Co.";
-      store.commit('setTitle', title);
-      next();
-    });
+  let title = to.meta.title || "5earn Co.";
+
+  if (to.path.startsWith('/item/') && to.params.id) {
+    const product = store.state.products.find(p => p.id == to.params.id);
+    if (product) title = product.name;
+  }
+
+  store.commit('setTitle', title);
+  next();
+});
+
 
     const app = Vue.createApp({
       computed: {
