@@ -5,17 +5,17 @@ export default {
             <div class="offcanvas-backdrop fade show" v-if="sideMenuOpen" @click="closeSideMenu"></div>
             
             <!-- Carousel Section -->
-            <div id="tradingCarousel" class="carousel slide mb-4 p-4" data-bs-ride="carousel">
-                <div class="carousel-inner">
+            <div id="tradingCarousel" class="carousel slide mb-4 h-50" data-bs-ride="carousel">
+                <div class="carousel-inner" style="height: 300px;">
                     <div class="carousel-item active">
-                        <img src="https://res.cloudinary.com/mandmshop/image/upload/v1733605195/caps.jpg" class="d-block w-100 rounded" alt="AI Trading">
+                        <img src="https://res.cloudinary.com/mandmshop/image/upload/v1733605195/caps.jpg" class="d-block w-100 h-100 object-fit-cover" alt="AI Trading">
                         <div class="carousel-caption d-none d-md-block">
                             <h5>AI-Powered Trading</h5>
                             <p>Maximize your profits with our advanced AI algorithms.</p>
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img src="https://res.cloudinary.com/mandmshop/image/upload/v1733605195/super.jpg" class="d-block w-100 rounded" alt="Buy & Earn">
+                        <img src="https://res.cloudinary.com/mandmshop/image/upload/v1733605195/super.jpg" class="d-block w-100 h-100 object-fit-cover" alt="Buy & Earn">
                         <div class="carousel-caption d-none d-md-block">
                             <h5>Earn More with 5ERN</h5>
                             <p>Get a 10% bonus on every purchase.</p>
