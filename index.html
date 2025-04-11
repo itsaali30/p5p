@@ -160,17 +160,13 @@
           <i class="fas fa-shopping-cart" @click="$router.push('/shop')"></i>
           <span class="label">Shop</span>
         </div>
-        <div class="nav-item" v-if="$store.state.cart.length > 0">
+        <div class="nav-item">
           <i class="fas fa-shopping-basket position-relative" @click="$router.push('/cart')">
             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-              {{ $store.state.cart.length }}
+              {{ totalCartItems }}
             </span>
           </i>
           <span class="label">Cart</span>
-        </div>
-        <div class="nav-item" v-else>
-          <i class="fas fa-history" @click="$router.push('/history')"></i>
-          <span class="label">History</span>
         </div>
       </div>
     </div>
@@ -184,13 +180,13 @@
         return {
           showProfileMenu: false,
           showSideMenu: false,
-          pageTitle: "5earn co.",
+          pageTitle: "Alifmart Co.",
           products: [
             { id: 1, name: "Analytics", desc: "Powerful insights", icon: "fa-chart-line", price: 29.99 },
             { id: 2, name: "Security", desc: "Top-level protection", icon: "fa-shield-alt", price: 19.49 },
             { id: 3, name: "Cloud Sync", desc: "Keep your data synced", icon: "fa-cloud", price: 24.75 },
             { id: 4, name: "Payments", desc: "Secure transactions", icon: "fa-credit-card", price: 49.00 },
-            { id: 5, name: "Support", desc: "24/7 service", icon: "fa-headset", price: 15.00 },
+            { id: 5, name: "Support", desc: "24/7 service", icon: "fa-headset", price: 15.00 }
           ],
           cart: []
         };
@@ -266,11 +262,7 @@
     });
 
     router.beforeEach((to, from, next) => {
-      let title = to.meta.title || "5earn Co.";
-      if (to.path.startsWith('/item/') && to.params.id) {
-        const product = store.state.products.find(p => p.id == to.params.id);
-        if (product) title = product.name;
-      }
+      const title = to.meta.title || "Alifmart Co.";
       store.commit('setTitle', title);
       next();
     });
