@@ -140,7 +140,8 @@
         <router-link to="/settings">Settings</router-link>
         <router-link to="/more">More</router-link>
         <router-link to="/sell">Sell</router-link>
-        <router-link to="/history">Transactions</router-link>
+        <router-link to="/history">history</router-link>
+        <router-link to="/transactions">Transactions</router-link>
       </div>
 
       <div class="bottom-nav d-flex justify-content-between align-items-center px-3">
@@ -258,7 +259,7 @@
         { path: '/cart', component: Cart, meta: { title: "Cart" } },
         { path: '/payment', component: Payment, meta: { title: "Payment" } },
         { path: '/history', component: History, meta: { title: "History" } }
-      ]
+      ],
     });
 
     router.beforeEach((to, from, next) => {
