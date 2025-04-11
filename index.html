@@ -156,25 +156,22 @@
           <i class="fas fa-hand-holding-usd" @click="$router.push('/buy')"></i>
           <span class="label">Buy</span>
         </div>
-        
         <div class="nav-item">
-  <i class="fas fa-shopping-cart" @click="$router.push('/shop')"></i>
-  <span class="label">Shop</span>
-</div>
- <div class="nav-item" v-if="$store.state.cart.length > 0">
-  <i class="fas fa-shopping-basket position-relative" @click="$router.push('/cart')">
-    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-      {{ $store.state.cart.length }}
-    </span>
-  </i>
-  <span class="label">Cart</span>
-</div>
-<div class="nav-item" v-else>
-  <i class="fas fa-history" @click="$router.push('/history')"></i>
-  <span class="label">History</span>
-</div>
-
-        
+          <i class="fas fa-shopping-cart" @click="$router.push('/shop')"></i>
+          <span class="label">Shop</span>
+        </div>
+        <div class="nav-item" v-if="$store.state.cart.length > 0">
+          <i class="fas fa-shopping-basket position-relative" @click="$router.push('/cart')">
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+              {{ $store.state.cart.length }}
+            </span>
+          </i>
+          <span class="label">Cart</span>
+        </div>
+        <div class="nav-item" v-else>
+          <i class="fas fa-history" @click="$router.push('/history')"></i>
+          <span class="label">History</span>
+        </div>
       </div>
     </div>
 
@@ -189,12 +186,12 @@
           showSideMenu: false,
           pageTitle: "5earn co.",
           products: [
-      { id: 1, name: "Analytics", desc: "Powerful insights", icon: "fa-chart-line", price: 29.99 },
-      { id: 2, name: "Security", desc: "Top-level protection", icon: "fa-shield-alt", price: 19.49 },
-      { id: 3, name: "Cloud Sync", desc: "Keep your data synced", icon: "fa-cloud", price: 24.75 },
-      { id: 4, name: "Payments", desc: "Secure transactions", icon: "fa-credit-card", price: 49.00 },
-      { id: 5, name: "Support", desc: "24/7 service", icon: "fa-headset", price: 15.00 },
-    ],
+            { id: 1, name: "Analytics", desc: "Powerful insights", icon: "fa-chart-line", price: 29.99 },
+            { id: 2, name: "Security", desc: "Top-level protection", icon: "fa-shield-alt", price: 19.49 },
+            { id: 3, name: "Cloud Sync", desc: "Keep your data synced", icon: "fa-cloud", price: 24.75 },
+            { id: 4, name: "Payments", desc: "Secure transactions", icon: "fa-credit-card", price: 49.00 },
+            { id: 5, name: "Support", desc: "24/7 service", icon: "fa-headset", price: 15.00 },
+          ],
           cart: []
         };
       },
@@ -246,8 +243,6 @@
     import Payment from "./src/Payment.js";
     import History from "./src/History.js";
 
-
-
     const Account = { template: '<h2>Account Page</h2>' };
     const Buy = { template: '<h2>Buy Page</h2>' };
     const Transactions = { template: '<h2>Transactions Page</h2>' };
@@ -262,27 +257,23 @@
         { path: '/login', component: Login, meta: { title: "Login" } },
         { path: '/signup', component: Signup, meta: { title: "Signup" } },
         { path: '/transactions', component: Transactions, meta: { title: "Transactions" } },
-        { path: '/shop', component: Shop,meta: { title: "Shop" } },
-        { path: '/item/:id', component: ItemView,meta: { title: "Item View" }, props: true },
-        { path: '/cart', component: Cart,meta: { title: "Cart" } },
-        { path: '/payment', component: Payment ,meta: { title: "payment" }},
-        { path: '/history', component: History ,meta: { title: "History" }}
-       ]
+        { path: '/shop', component: Shop, meta: { title: "Shop" } },
+        { path: '/item/:id', component: ItemView, meta: { title: "Item View" }, props: true },
+        { path: '/cart', component: Cart, meta: { title: "Cart" } },
+        { path: '/payment', component: Payment, meta: { title: "Payment" } },
+        { path: '/history', component: History, meta: { title: "History" } }
+      ]
     });
 
     router.beforeEach((to, from, next) => {
-  let title = to.meta.title || "5earn Co.";
-
-  if (to.path.startsWith('/item/') && to.params.id) {
-    const product = store.state.products.find(p => p.id == to.params.id);
-    if (product) title = product.name;
-  }
-
-  store.commit('setTitle', title);
-  next();
-});
-
-
+      let title = to.meta.title || "5earn Co.";
+      if (to.path.startsWith('/item/') && to.params.id) {
+        const product = store.state.products.find(p => p.id == to.params.id);
+        if (product) title = product.name;
+      }
+      store.commit('setTitle', title);
+      next();
+    });
 
     const app = Vue.createApp({
       computed: {
