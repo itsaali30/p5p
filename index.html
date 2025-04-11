@@ -171,11 +171,20 @@
         </div>
       </div>
     </div>
-
     <router-view></router-view>
   </div>
 
   <script type="module">
+    import Home from "./src/home.js";
+    import Sell from "./src/sell.js";
+    import Login from "./src/Login.js";
+    import Signup from "./src/Signup.js";
+    import Shop from "./src/Shop.js";
+    import ItemView from "./src/itemview.js";
+    import Cart from "./src/Cart.js";
+    import Payment from "./src/Payment.js";
+    import History from "./src/History.js";
+
     const store = Vuex.createStore({
       state() {
         return {
@@ -230,36 +239,19 @@
       }
     });
 
-    import Home from "./src/home.js";
-    import Sell from "./src/sell.js";
-    import Login from "./src/Login.js";
-    import Signup from "./src/Signup.js";
-    import Shop from "./src/Shop.js";
-    import ItemView from "./src/itemview.js";
-    import Cart from "./src/Cart.js";
-    import Payment from "./src/Payment.js";
-    import History from "./src/History.js";
-
-    const Account = { template: '<h2>Account Page</h2>' };
-    const Buy = { template: '<h2>Buy Page</h2>' };
-    const Transactions = { template: '<h2>Transactions Page</h2>' };
-
     const router = VueRouter.createRouter({
       history: VueRouter.createWebHistory(),
       routes: [
         { path: '/', component: Home, meta: { title: "Home" } },
-        { path: '/account', component: Account, meta: { title: "Account" } },
-        { path: '/buy', component: Buy, meta: { title: "Buy" } },
         { path: '/sell', component: Sell, meta: { title: "Sell" } },
         { path: '/login', component: Login, meta: { title: "Login" } },
         { path: '/signup', component: Signup, meta: { title: "Signup" } },
-        { path: '/transactions', component: Transactions, meta: { title: "Transactions" } },
         { path: '/shop', component: Shop, meta: { title: "Shop" } },
         { path: '/item/:id', component: ItemView, meta: { title: "Item View" }, props: true },
         { path: '/cart', component: Cart, meta: { title: "Cart" } },
         { path: '/payment', component: Payment, meta: { title: "Payment" } },
         { path: '/history', component: History, meta: { title: "History" } }
-      ],
+      ]
     });
 
     router.beforeEach((to, from, next) => {
