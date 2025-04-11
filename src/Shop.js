@@ -1,7 +1,8 @@
 export default {
   template: `
     <div>
-      <h2 class="mb-3">Products</h2>
+      <span class="placeholder mb-3"></span>
+
       <input v-model="search" class="form-control mb-4" placeholder="Search products..." />
 
       <div v-for="(product, index) in filtered" :key="product.id" class="card mb-4 p-3 shadow-sm">
