@@ -140,7 +140,7 @@
         <router-link to="/settings">Settings</router-link>
         <router-link to="/more">More</router-link>
         <router-link to="/sell">Sell</router-link>
-        <router-link to="/transactions">Transactions</router-link>
+        <router-link to="/history>Transactions</router-link>
       </div>
 
       <div class="bottom-nav d-flex justify-content-between align-items-center px-3">
@@ -244,6 +244,9 @@
     import ItemView from "./src/itemview.js";
     import Cart from "./src/Cart.js";
     import Payment from "./src/Payment.js";
+    import History from "./src/History.js";
+
+
 
     const Account = { template: '<h2>Account Page</h2>' };
     const Buy = { template: '<h2>Buy Page</h2>' };
@@ -262,8 +265,9 @@
         { path: '/shop', component: Shop,meta: { title: "Shop" } },
         { path: '/item/:id', component: ItemView,meta: { title: "Item View" }, props: true },
         { path: '/cart', component: Cart,meta: { title: "Cart" } },
-        { path: '/payment', component: Payment ,meta: { title: "payment" }}
-      ]
+        { path: '/payment', component: Payment ,meta: { title: "payment" }},
+        { path: '/history', component: History ,meta: { title: "history" }}
+       ]
     });
 
     router.beforeEach((to, from, next) => {
