@@ -76,11 +76,10 @@ body, html {
     }
     .nav-item i:hover {
       color: #ffd700;
-      transform: translateY(-12px);
-    }
+        }
     .nav-item i:active {
       color: #ffd700;
-      transform: translateY(-26px);
+  
     }
     .cart-badge {
       position: absolute;
